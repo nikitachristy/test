@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PPM TEST 1</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="jmobile/jquery.mobile-1.4.5.css">
+	<script type="text/javascript" src="jmobile/demos/js/jquery.js"></script>
+	<script type="text/javascript" src="jmobile/demos/js/jquery.mobile-1.4.5.js"></script>
+	<style>
+	p
+	{
+		width:200px;
+		height:200px;
+	}
+	/* Basic styles */
+.rwd-example .ui-body {
+    text-align: left;
+    border-color: #ddd;
+}
+.rwd-example p {
+    color: #777;
+    line-height: 140%
+}
+/* Stack all blocks to start */
+.rwd-example .ui-block-a,
+.rwd-example .ui-block-b,
+.rwd-example .ui-block-c {
+    width: 100%;
+    float: none;
+}
+/* Collapsing borders */
+.rwd-example > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .rwd-example {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    .rwd-example .ui-body {
+       min-height: 14em;
+    }
+    .rwd-example .ui-block-b,
+    .rwd-example .ui-block-c {
+      float: left;
+      width: 49.95%;
+    }
+    .rwd-example .ui-block-b p,
+    .rwd-example .ui-block-c p {
+      font-size: .8em;
+    }
+    .rwd-example > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .rwd-example > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .rwd-example > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .rwd-example .ui-body {
+       min-height: 18em;
+    }
+    .rwd-example .ui-block-a,
+    .rwd-example .ui-block-c {
+      float: left;
+      width: 49.95%;
+    }
+    .rwd-example .ui-block-b,
+    .rwd-example .ui-block-c {
+      float: left;
+      width: 24.925%;
+    }
+    .rwd-example > div:first-child .ui-body {
+        border-bottom-width: 1px;
+    }
+    .rwd-example > div + div .ui-body {
+        border-left-width: 0;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .rwd-example .ui-body {
+      font-size: 125%;
+    }
+    .rwd-example .ui-block-a,
+    .rwd-example .ui-block-c {
+      float: left;
+      width: 49.95%;
+    }
+    .rwd-example .ui-block-b,
+    .rwd-example .ui-block-c {
+      float: left;
+      width: 24.925%;
+    }
+}
+
+@media all and (max-width: 35em) {
+	.my-breakpoint .ui-block-a,
+	.my-breakpoint .ui-block-b,
+	.my-breakpoint .ui-block-c,
+	.my-breakpoint .ui-block-d,
+	.my-breakpoint .ui-block-e {
+		width: 100%;
+		float: none;
+	}
+}
+	</style>
+	<script>
+	function warna ()
+	{
+		var r = document.getElementById("red").value;
+		var g = document.getElementById("green").value;
+		var b = document.getElementById("blue").value;
+		
+		document.getElementById("disini").innerHTML = "<p style=\"background-color: rgb("+r+","+g+","+b+");\"></p>";
+	}
+
+	function check() {
+    var r = document.getElementById("red").value;
+	var g = document.getElementById("green").value;
+	var b = document.getElementById("blue").value;
+    try { 
+        if(r == "" && g == "" && b == "")  throw "empty";
+    }
+    catch(err) {
+        document.getElementById("disini").innerHTML = "Input is still " + err;
+    }
+}
+
+	$( document ).on( "click", ".show-page-loading-msg", function() {
+    var $this = $( this ),
+        theme = $this.jqmData( "theme" ) || $.mobile.loader.prototype.options.theme,
+        msgText = $this.jqmData( "msgtext" ) || $.mobile.loader.prototype.options.text,
+        textVisible = $this.jqmData( "textvisible" ) || $.mobile.loader.prototype.options.textVisible,
+        textonly = !!$this.jqmData( "textonly" );
+        html = $this.jqmData( "html" ) || "";
+    $.mobile.loading( "show", {
+            text: msgText,
+            textVisible: textVisible,
+            theme: theme,
+            textonly: textonly,
+            html: html
+    });
+})
+.on( "click", ".hide-page-loading-msg", function() {
+    $.mobile.loading( "hide" );
+});
+
+
+	</script>
+</head>
+<body>
+	<!-- <div data-role=page> -->
+	<div data-role="page" class="jqm-demos" id="panel-fixed-page1" data-title="Test PPM" data-url="panel-fixed-page1">
+		<div data-role="header" data-position="fixed">
+	        <h1>Fixed menu</h1>
+	        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+	    </div>
+		<div class="ui-field-contain" data-url="0">
+		    <h1>Menu :</h1>
+		    <!-- <select onchange="if (this.value) window.location.href=this.value"> -->
+		    <select name="select-custom-21" id="select-custom-21" data-native-menu="false">
+		        <option value="choose-one" data-placeholder="true">Choose</option>
+		        <option value="0"><a href="#0" data-ajax="false">Choose</a></option>
+		        <option value="1"><a href="#1" data-ajax="false">Calculator</a></option>
+		        <option value="2"><a href="#2" data-ajax="false">RGB Color</a></option>
+		        <option value="3"><a href="#3" data-ajax="false">Sumary</a></option>
+		    </select>
+		</div>
+		<div id="1" class="ui-body-d ui-content" data-url="1">
+			<h1>Calculator :</h1>
+		    <!-- <a href="kalkulator.html"> Try this </a> -->
+		    <button class="show-page-loading-msg" data-textonly="false" data-textvisible="true" data-msgtext="loading" data-inline="true">Open kalkulator.php</button>
+		    <button class="hide-page-loading-msg" data-inline="true" data-icon="delete">Stop</button>
+		    <br>
+		    <b>Insert Decimal Number: </b><input type = "text" name = "deci" id = "deci" size = "15" maxlength = "15" />
+			<input type="button" value="Convert!" onclick="dec2bin()" />
+			<br><br>
+			<div id = "result"></div>
+
+			<script type = "text/javascript">
+
+			function dec2bin() {
+			var x = document.getElementById("deci").value;
+			if ((/[^0-9]/g.test(x)) || x == "") {
+			alert ("You must enter an integer decimal number!");
+			document.getElementById("deci").value = "";
+			document.getElementById("deci").focus();
+			return false;
+			}
+			x = parseInt(x);
+			var bin = x.toString(2);
+			var hex = x.toString(16).toUpperCase();
+			var octal = x.toString(8);
+
+
+			var figs = "Binary " + x + " = " + bin + "<br>";
+			figs = figs + "Hexadecimal " + x + " = " + hex + "<br>";
+
+			document.getElementById("result").innerHTML = figs;
+			}
+			</script>
+		</div>
+
+		<div id="2" class="ui-body-d ui-content" data-url="2">
+			<h1>RGB Color :</h1>
+			<input type="number" id="red" min="0" max="255">
+			<input type="number" id="green" min="0" max="255">
+			<input type="number" id="blue" min="0" max="255">
+			<button onclick="warna(), check()">change color</button>
+			<div id="disini"><p></p></div>
+		</div>
+
+		<div id="3" class="ui-body-d ui-content" data-url="3">
+			<h1>Rangkuman materi yang sudah saya pelajari adalah : </h1>
+			<div class="rwd-example">
+			    <!-- Lead story block -->
+			    <div class="ui-block-a">
+			        <div class="ui-body ui-body-d">
+			            <h2>Git :</h2>
+			            <ul data-role="listview">
+						    <li>Git init : menginisialisasi sebuah repository Git baru</li>
+						    <li>Git status : mengecek status apa saja yang ada dalam repositori Git</li>
+						    <li>Git add : menambahkan suatu file pada stage area</li>
+						    <li>Git commit –m : untuk menyimpan stage yang telah di buat dengan memberikan pesan</li>
+						    <li>jQuery Mobile : framework jQuery yang terdapat fitur-fitur untuk aplikasi mobile</li>
+						<li>data-role page : membuat web 1 halaman</li>
+						</ul>
+			        </div>
+			    </div>
+			    <!-- secondary story block #1 -->
+			    <div class="ui-block-b">
+			        <div class="ui-body ui-body-d">
+			            <h4>jQuery Mobile :</h4>
+			            <ul data-role="listview">
+						    <li>jQuery Mobile : framework jQuery yang terdapat fitur-fitur untuk aplikasi mobile</li>
+							<li>data-role page : membuat web 1 halaman</li>
+							<li>penggunaan jQuery Mobile dengan menggunakan HTML5</li>
+						</ul>
+			        </div>
+			    </div>
+			<div class="ui-block-c">
+			        <div class="ui-body ui-body-d">
+						<h4>Penguasaan Materi :</h4>
+			            <form>
+						    <label for="flip-1">Apakah saya sudah menguasai materi test ini ?</label>
+						    <select id="flip-1" name="flip-1" data-role="slider">
+						        <option value="off">Belum</option>
+						        <option value="on">Sudah</option>
+						    </select>
+						</form>
+			        </div>
+			    </div>
+			</div><!-- /rwd-example -->
+
+		</div>
+		<div data-role="panel" data-position-fixed="true" data-display="push" data-theme="b" id="nav-panel">
+	        <ul data-role="listview">
+	            <li data-icon="delete"><a href="#" data-rel="close">Close menu</a></li>
+	                <li><a href="#1">Calculator</a></li>
+	                <li><a href="#2">RGB Color</a></li>
+	                <li><a href="#3">Sumary</a></li>
+	        </ul>
+	    </div>
+	</div>
+	<!-- </div> -->
+</body>
+</html>
